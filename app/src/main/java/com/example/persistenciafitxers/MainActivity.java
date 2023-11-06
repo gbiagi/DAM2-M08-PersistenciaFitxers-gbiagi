@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -18,8 +20,8 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<String> listaNombres = new ArrayList<>();
         listaNombres.add("Jose");
-        listaNombres.add("Jose");
-        listaNombres.add("Jose");
+        listaNombres.add("Pepe");
+        listaNombres.add("Isidro");
 
         ArrayList<String> listaApellidos = new ArrayList<>();
         listaNombres.add("Gonzalez");
@@ -36,12 +38,32 @@ public class MainActivity extends AppCompatActivity {
         listaNombres.add("javaenjoyer34@gmail.es");
         listaNombres.add("listviewer56@gmail.e-s");
 
-        Button botonGuardar = findViewById(R.id.botonGuardar);
+        TextView textNom = findViewById(R.id.textNom);
+        TextView textCognom = findViewById(R.id.textCognom);
+        TextView textTelefon = findViewById(R.id.textTelefon);
+        TextView textEmail = findViewById(R.id.textEmail);
 
+        EditText editNom = findViewById(R.id.inputNom);
+        EditText editCognom = findViewById(R.id.inputCognom);
+        EditText editTelefon = findViewById(R.id.inputTelefon);
+        EditText editEmail = findViewById(R.id.inputEmail);
+
+
+
+
+        Button botonGuardar = findViewById(R.id.botonGuardar);
         botonGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("INFO", "J3J3J3J3J3J3J3J3J3J3J3J3J");
+                String nom = editNom.getText().toString();
+                String cognom = editCognom.getText().toString();
+                String telefon = editTelefon.getText().toString();
+                String email = editEmail.getText().toString();
+
+                Log.i("Nombres", nom);
+                Log.i("Apellidos", cognom);
+                Log.i("Telefonos", telefon);
+                Log.i("Emails", email);
 
             }
         });
