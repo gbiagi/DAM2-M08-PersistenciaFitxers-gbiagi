@@ -2,13 +2,18 @@ package com.example.persistenciafitxers;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -48,9 +53,6 @@ public class MainActivity extends AppCompatActivity {
         EditText editTelefon = findViewById(R.id.inputTelefon);
         EditText editEmail = findViewById(R.id.inputEmail);
 
-
-
-
         Button botonGuardar = findViewById(R.id.botonGuardar);
         botonGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,13 +62,26 @@ public class MainActivity extends AppCompatActivity {
                 String telefon = editTelefon.getText().toString();
                 String email = editEmail.getText().toString();
 
-                Log.i("Nombres", nom);
-                Log.i("Apellidos", cognom);
-                Log.i("Telefonos", telefon);
-                Log.i("Emails", email);
+                Log.i("Nombre", nom);
+                listaNombres.add(nom);
+                Log.i("Apellido", cognom);
+                listaApellidos.add(cognom);
+                Log.i("Telefono", telefon);
+                listatelefonos.add(telefon);
+                Log.i("Email", email);
+                listaemails.add(email);
 
+                String data = "\n"+ nom + ";" + cognom + ";" + telefon + ";" + email;
+
+                try (FileOutputStream fileOut = openFileOutput("contactes.txt", Context.MODE_APPEND)) {
+                    fileOut.write(data.getBytes());
+                    Toast.makeText(MainActivity.this, "Contacte guardat correctament", Toast.LENGTH_SHORT).show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Toast.makeText(MainActivity.this, "Error al desar el contacte", Toast.LENGTH_SHORT).show();
+                }
             }
-        });
-
+        }
+        );
     }
 }
